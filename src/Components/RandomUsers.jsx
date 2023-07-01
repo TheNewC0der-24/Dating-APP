@@ -18,13 +18,13 @@ import FemaleIcon from '@mui/icons-material/Female';
 
 import { capitalizeFirstLetter } from '../Utilities/Capitalize';
 
-const RandomUsers = ({ userData, loading }) => {
+const RandomUsers = ({ userData, loadingUsers, findMatch }) => {
 
     return (
         <Box sx={{ bgcolor: "#dee2e6", padding: "2rem" }}>
             <Typography mb={3} variant='h5'>Users</Typography>
 
-            {loading && (
+            {loadingUsers && (
                 <Box sx={{ display: 'flex', justifyContent: "center" }}>
                     <CircularProgress />
                 </Box>
@@ -32,7 +32,7 @@ const RandomUsers = ({ userData, loading }) => {
             {userData && userData.length > 0 ? (
                 <Box sx={{ height: "530px", overflowY: "auto" }}>
                     {userData.map((user) => (
-                        <Card sx={{ mb: 3 }} key={user.id.value}>
+                        <Card sx={{ mb: 3 }} key={user.name.first}>
                             <CardHeader
                                 avatar={
                                     <Avatar sx={{ bgcolor: "#000" }}>
@@ -53,7 +53,7 @@ const RandomUsers = ({ userData, loading }) => {
                                 <Typography variant="subtitle1">Location: {user.location.city}, {user.location.country}</Typography>
                             </CardContent>
                             <CardActions sx={{ borderTop: "1px solid #dee2e6" }}>
-                                <Button variant='contained' color="secondary" size="small">Find Match</Button>
+                                <Button variant='contained' color="secondary" size="small" onClick={() => findMatch(user.gender, user.name, user.location.coordinates)}>Find Match</Button>
                             </CardActions>
                         </Card>
                     ))}
