@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import {
     Box,
@@ -8,7 +8,6 @@ import {
     CardMedia,
     Avatar,
     Typography,
-    Chip,
     CircularProgress,
     CardActions,
     Button
@@ -17,11 +16,13 @@ import {
 import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';
 
+import { capitalizeFirstLetter } from '../Utilities/Capitalize';
+
 const RandomUsers = ({ userData, loading }) => {
 
     return (
         <Box sx={{ bgcolor: "#dee2e6", padding: "2rem" }}>
-            <Typography mb={3} variant='h5'>Random Users</Typography>
+            <Typography mb={3} variant='h5'>Users</Typography>
 
             {loading && (
                 <Box sx={{ display: 'flex', justifyContent: "center" }}>
@@ -29,7 +30,7 @@ const RandomUsers = ({ userData, loading }) => {
                 </Box>
             )}
             {userData && userData.length > 0 ? (
-                <Box sx={{ height: "375px", overflowY: "auto" }}>
+                <Box sx={{ height: "530px", overflowY: "auto" }}>
                     {userData.map((user) => (
                         <Card sx={{ mb: 3 }} key={user.id.value}>
                             <CardHeader
@@ -48,7 +49,7 @@ const RandomUsers = ({ userData, loading }) => {
                             />
                             <CardContent>
                                 <Typography variant="subtitle1">Age: {user.dob.age}</Typography>
-                                <Typography variant="subtitle1">Gender: {user.gender}</Typography>
+                                <Typography variant="subtitle1">Gender: {capitalizeFirstLetter(user.gender)}</Typography>
                                 <Typography variant="subtitle1">Location: {user.location.city}, {user.location.country}</Typography>
                             </CardContent>
                             <CardActions sx={{ borderTop: "1px solid #dee2e6" }}>
